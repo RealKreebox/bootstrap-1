@@ -4,15 +4,22 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./dom/selector-engine.js'), require('./dom/event-handler.js'), require('./base-component.js')) :
-  typeof define === 'function' && define.amd ? define(['./dom/selector-engine', './dom/event-handler', './base-component'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Alert = factory(global.SelectorEngine, global.EventHandler, global.Base));
-}(this, (function (SelectorEngine, EventHandler, BaseComponent) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('./dom/event-handler.js'), require('./base-component.js')) :
+  typeof define === 'function' && define.amd ? define(['./dom/event-handler', './base-component'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Alert = factory(global.EventHandler, global.Base));
+}(this, (function (EventHandler, BaseComponent) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
   var EventHandler__default = /*#__PURE__*/_interopDefaultLegacy(EventHandler);
   var BaseComponent__default = /*#__PURE__*/_interopDefaultLegacy(BaseComponent);
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.0.2): util/index.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
 
   const getSelector = element => {
     let selector = element.getAttribute('data-bs-target');
@@ -41,6 +48,22 @@
   const getElementFromSelector = element => {
     const selector = getSelector(element);
     return selector ? document.querySelector(selector) : null;
+  };
+
+  const isDisabled = element => {
+    if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+      return true;
+    }
+
+    if (element.classList.contains('disabled')) {
+      return true;
+    }
+
+    if (typeof element.disabled !== 'undefined') {
+      return element.disabled;
+    }
+
+    return element.hasAttribute('disabled') && element.getAttribute('disabled') !== 'false';
   };
 
   const getjQuery = () => {
@@ -127,37 +150,26 @@
     } // Public
 
 
-    close(element) {
-      const rootElement = element ? this._getRootElement(element) : this._element;
+    close() {
+      const closeEvent = EventHandler__default['default'].trigger(this._element, EVENT_CLOSE);
 
-      const customEvent = this._triggerCloseEvent(rootElement);
-
-      if (customEvent === null || customEvent.defaultPrevented) {
+      if (closeEvent.defaultPrevented) {
         return;
       }
 
-      this._removeElement(rootElement);
+      this._element.classList.remove(CLASS_NAME_SHOW);
+
+      const isAnimated = this._element.classList.contains(CLASS_NAME_FADE);
+
+      this._queueCallback(() => this._destroyElement(), this._element, isAnimated);
     } // Private
 
 
-    _getRootElement(element) {
-      return getElementFromSelector(element) || element.closest(`.${CLASS_NAME_ALERT}`);
-    }
+    _destroyElement() {
+      this._element.remove();
 
-    _triggerCloseEvent(element) {
-      return EventHandler__default['default'].trigger(element, EVENT_CLOSE);
-    }
-
-    _removeElement(element) {
-      element.classList.remove(CLASS_NAME_SHOW);
-      const isAnimated = element.classList.contains(CLASS_NAME_FADE);
-
-      this._queueCallback(() => this._destroyElement(element), element, isAnimated);
-    }
-
-    _destroyElement(element) {
-      element.remove();
-      EventHandler__default['default'].trigger(element, EVENT_CLOSED);
+      EventHandler__default['default'].trigger(this._element, EVENT_CLOSED);
+      this.dispose();
     } // Static
 
 
@@ -165,20 +177,16 @@
       return this.each(function () {
         const data = Alert.getOrCreateInstance(this);
 
-        if (config === 'close') {
-          data[config](this);
+        if (typeof config !== 'string') {
+          return;
         }
+
+        if (data[config] === undefined || config.startsWith('_') || config === 'constructor') {
+          throw new TypeError(`No method named "${config}"`);
+        }
+
+        data[config](this);
       });
-    }
-
-    static handleDismiss(alertInstance) {
-      return function (event) {
-        if (event) {
-          event.preventDefault();
-        }
-
-        alertInstance.close(this);
-      };
     }
 
   }
@@ -189,7 +197,19 @@
    */
 
 
-  EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, SELECTOR_DISMISS, Alert.handleDismiss(new Alert()));
+  EventHandler__default['default'].on(document, EVENT_CLICK_DATA_API, SELECTOR_DISMISS, function (event) {
+    if (['A', 'AREA'].includes(this.tagName)) {
+      event.preventDefault();
+    }
+
+    if (isDisabled(this)) {
+      return;
+    }
+
+    const target = getElementFromSelector(this) || this.closest(`.${CLASS_NAME_ALERT}`);
+    const alert = Alert.getOrCreateInstance(target);
+    alert.close();
+  });
   /**
    * ------------------------------------------------------------------------
    * jQuery

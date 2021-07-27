@@ -9,6 +9,13 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.EventHandler = factory());
 }(this, (function () { 'use strict';
 
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v5.0.2): util/index.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+
   const getjQuery = () => {
     const {
       jQuery

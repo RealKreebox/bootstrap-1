@@ -1,0 +1,35 @@
+.k--tab-pane {
+  @extend .tab-pane !optional;
+}
+
+.k--fade {
+  @extend .fade !optional;
+}
+
+.k--nav {
+  @extend .nav !optional;
+}
+
+.k--nav-tabs {
+  @extend .nav-tabs !optional;
+}
+
+.k--nav-item {
+  @extend .nav-item !optional;
+}
+
+.k--tab-content {
+  @extend .tab-content !optional;
+}
+
+.k--nav-link {
+  @extend .nav-link !optional;
+}
+
+.k--active {
+  @extend .active !optional;
+}
+
+.k--show {
+  @extend .show !optional;
+}
