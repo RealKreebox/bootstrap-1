@@ -79,7 +79,7 @@
     "watch-js-main": "nodemon --watch js/src/ --ext js --exec \"npm-run-all js-lint js-compile\"",
     "watch-js-docs": "nodemon --watch site/assets/js/ --ext js --exec \"npm run js-lint\"",
     "start:dev": "npm-run-all --parallel watch serve:dist",
-    "serve:dist": "http-server dist -p 80"
+    "serve:dist": "http-server dist -p 3000"
   },
   "style": "dist/css/bootstrap.css",
   "sass": "scss/bootstrap.scss",

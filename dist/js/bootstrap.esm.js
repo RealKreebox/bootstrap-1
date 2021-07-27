@@ -4609,17 +4609,17 @@ const EVENT_HIDDEN$1 = `hidden${EVENT_KEY$1}`;
 const EVENT_SHOW$1 = `show${EVENT_KEY$1}`;
 const EVENT_SHOWN$1 = `shown${EVENT_KEY$1}`;
 const EVENT_CLICK_DATA_API = `click${EVENT_KEY$1}${DATA_API_KEY}`;
-const CLASS_NAME_DROPDOWN_MENU = 'dropdown-menu';
-const CLASS_NAME_ACTIVE = 'active';
-const CLASS_NAME_FADE$1 = 'fade';
-const CLASS_NAME_SHOW$1 = 'show';
-const SELECTOR_DROPDOWN = '.dropdown';
-const SELECTOR_NAV_LIST_GROUP = '.nav, .list-group';
-const SELECTOR_ACTIVE = '.active';
-const SELECTOR_ACTIVE_UL = ':scope > li > .active';
+const CLASS_NAME_DROPDOWN_MENU = 'k--dropdown-menu';
+const CLASS_NAME_ACTIVE = 'k--active';
+const CLASS_NAME_FADE$1 = 'k--fade';
+const CLASS_NAME_SHOW$1 = 'k--show';
+const SELECTOR_DROPDOWN = '.k--dropdown';
+const SELECTOR_NAV_LIST_GROUP = '.k--nav, .k--list-group';
+const SELECTOR_ACTIVE = '.k--active';
+const SELECTOR_ACTIVE_UL = ':scope > li > .k--active';
 const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="tab"], [data-bs-toggle="pill"], [data-bs-toggle="list"]';
-const SELECTOR_DROPDOWN_TOGGLE = '.dropdown-toggle';
-const SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .dropdown-menu .active';
+const SELECTOR_DROPDOWN_TOGGLE = '.k--dropdown-toggle';
+const SELECTOR_DROPDOWN_ACTIVE_CHILD = ':scope > .k--dropdown-menu .k--active';
 /**
  * ------------------------------------------------------------------------
  * Class Definition

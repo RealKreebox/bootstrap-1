@@ -1,3 +1,33 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "../functions";
+
+// 2. Include any default variable overrides here
+$neutral-light-2: #f5f5f5 !default;
+$neutral-light-3: #e0e0e0 !default;
+$nav-tabs-link-active-bg: $neutral-light-3 !default;
+$nav-tabs-border-radius: 0 !default;
+
+// 3. Include remainder of required Bootstrap stylesheets
+@import "../variables";
+@import "../mixins";
+
+// 4. Include any optional Bootstrap components as you like
+@import "../root";
+@import "../reboot";
+@import "../type";
+@import "../images";
+@import "../containers";
+@import "../grid";
+@import "../nav";
+
+// 5. Add additional custom code here
+
+.nav-tabs {
+  .nav-link {
+    background-color: $neutral-light-2;
+  }
+}
+
 .k--tab-pane {
   @extend .tab-pane !optional;
 }
@@ -12,6 +42,7 @@
 
 .k--nav-tabs {
   @extend .nav-tabs !optional;
+  border-bottom: 1px solid $neutral-light-3;
 }
 
 .k--nav-item {
