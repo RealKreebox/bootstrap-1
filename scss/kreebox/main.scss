@@ -6,10 +6,12 @@ $neutral-light-2: #f5f5f5 !default;
 $neutral-light-3: #e0e0e0 !default;
 $nav-tabs-link-active-bg: $neutral-light-3 !default;
 $nav-tabs-border-radius: 0 !default;
+$light: $neutral-light-2 !default;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../variables";
 @import "../mixins";
+@import "../utilities";
 
 // 4. Include any optional Bootstrap components as you like
 @import "../root";
@@ -17,11 +19,31 @@ $nav-tabs-border-radius: 0 !default;
 @import "../type";
 @import "../images";
 @import "../containers";
+@import "../transitions";
 @import "../grid";
 @import "../nav";
+@import "../navbar";
+
+// Helpers
+@import "../helpers";
+
+// Utilities
+@import "../utilities/api";
 
 // 5. Add additional custom code here
 
+// Utilities
+
+.k--bg-light {
+  @extend .bg-light !optional;
+}
+
+// Container
+.k--container {
+  @extend .container;
+}
+
+// Nav
 .nav-tabs {
   .nav-link {
     background-color: $neutral-light-2;
@@ -63,4 +85,76 @@ $nav-tabs-border-radius: 0 !default;
 
 .k--show {
   @extend .show !optional;
+}
+
+// Navbar
+.k--navbar {
+  @extend .navbar;
+}
+
+.k--navbar-light {
+  @extend .navbar-light;
+}
+
+.k--navbar-expand-lg {
+  @extend .navbar-expand-lg;
+}
+
+.k--navbar-brand {
+  @extend .navbar-brand;
+}
+
+.k--navbar-toggler {
+  @extend .navbar-toggler;
+}
+
+.k--navbar-toggler-icon {
+  @extend .navbar-toggler-icon;
+}
+
+.k--navbar-collapse {
+  @extend .navbar-collapse;
+}
+
+.k--navbar-nav {
+  @extend .navbar-nav;
+}
+
+// Transition
+
+.k--collapse {
+  @extend .collapse;
+}
+
+// Grid
+.k--row {
+  @extend .row;
+}
+
+.k--col {
+  @extend .col;
+}
+
+.k--col-2 {
+  @extend .col-2;
+}
+
+.k--col-3 {
+  @extend .col-3;
+}
+
+.k--col-4 {
+  @extend .col-4;
+}
+
+.k--col-5 {
+  @extend .col-5;
+}
+
+.k--col-6 {
+  @extend .col-6;
+}
+
+.k--col-9 {
+  @extend .col-9;
 }
