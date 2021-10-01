@@ -7,6 +7,7 @@ $neutral-light-3: #e0e0e0 !default;
 $nav-tabs-link-active-bg: $neutral-light-3 !default;
 $nav-tabs-border-radius: 0 !default;
 $light: $neutral-light-2 !default;
+$grid-gutter-width: 0 !default;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../variables";
