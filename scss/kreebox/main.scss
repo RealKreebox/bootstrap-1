@@ -2,12 +2,24 @@
 @import "../functions";
 
 // 2. Include any default variable overrides here
+$enable-shadows: true !default;
+
 $neutral-light-2: #f5f5f5 !default;
 $neutral-light-3: #e0e0e0 !default;
 $nav-tabs-link-active-bg: $neutral-light-3 !default;
 $nav-tabs-border-radius: 0 !default;
 $light: $neutral-light-2 !default;
 $grid-gutter-width: 0 !default;
+// Carousel
+$carousel-indicator-active-bg: #bfbfbf !default;
+$carousel-control-color: #bfbfbf !default;
+
+/* prettier-ignore */
+$carousel-indicator-width: 1rem !default;
+
+/* prettier-ignore */
+$carousel-indicator-height: 1rem !default;
+$carousel-indicator-hit-area-height: 0 !default;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../variables";
@@ -24,6 +36,7 @@ $grid-gutter-width: 0 !default;
 @import "../grid";
 @import "../nav";
 @import "../navbar";
+@import "../carousel";
 
 // Helpers
 @import "../helpers";
@@ -158,4 +171,30 @@ $grid-gutter-width: 0 !default;
 
 .k--col-9 {
   @extend .col-9;
+}
+
+.carousel-indicators {
+  [data-bs-target] {
+    /* prettier-ignore */
+    font-size: .7rem;
+    text-indent: unset;
+  }
+}
+.carousel-indicators-rounded {
+  [data-bs-target] {
+    border-radius: 50%; // stylelint-disable-line property-disallowed-list
+  }
+}
+
+.carousel-indicators-shadow {
+  [data-bs-target] {
+    @include box-shadow(0 0 3px rgb(51 51 51 / 40%));
+  }
+}
+
+.carousel-indicators-invert {
+  [data-bs-target] {
+    color: $white;
+    background-color: $carousel-dark-indicator-active-bg;
+  }
 }
